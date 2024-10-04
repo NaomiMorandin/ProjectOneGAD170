@@ -15,7 +15,9 @@ public class NewBehaviourScript : MonoBehaviour
     public int enemyHealth = 0;
     public int enemyDamage = 0;
     public int exp = 0;
-    public GameObject text;
+    public GameObject hp;
+
+
     bool playerAlive(int a) { 
         //Script to return if player is alive or dead
             if (a >= 0)
@@ -30,9 +32,20 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         expThreshold = 50 * level;
+        // sets exp threshold for initial level up, future levels check under update
 
+        int sceneSelector = (UnityEngine.Random.Range(1, 6));
+        //scene selector picks a random number 1 through 5, switch has 5 cases assigned to it that will be chosen based on randomInt
+        switch (sceneSelector)
+        {
+            case 1:
+
+                break;
+
+
+
+        }
     }
-    int ChooseEnemy;
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +65,7 @@ public class NewBehaviourScript : MonoBehaviour
 
 
 
-        text.GetComponent<TextMeshProUGUI>().text = "HP: " + playerHealth;
+        hp.GetComponent<TextMeshProUGUI>().text = "HP: " + playerHealth;
         // prints player health to UI
 
 
