@@ -15,6 +15,8 @@ public class NewBehaviourScript : MonoBehaviour
     public int enemyHealth = 0;
     public int enemyDamage = 0;
     public int exp = 0;
+    public int attackDamage = 0;
+    public int playerHealth = 0;
     public GameObject hp;
     public GameObject fightButton;
     public GameObject fightButtonText;
@@ -41,7 +43,8 @@ public class NewBehaviourScript : MonoBehaviour
         int sceneSelector = (UnityEngine.Random.Range(1, 6));
         //scene selector picks a random number 1 through 5, switch has 5 cases assigned to it that will be chosen based on randomInt
 
-
+        StatSet();
+        hp.GetComponent<TextMeshProUGUI>().text = "HP: " + playerHealth;
 
 
     }
@@ -56,16 +59,12 @@ public class NewBehaviourScript : MonoBehaviour
             exp = 0;
 
         }
-        int attackDamage = power * level;
-        int playerHealth = stamina * level;
-        int enemyHealth = 4 * level;
-        int enemyDamage = 3 * level;
+        
         playerAlive(playerHealth);
         // tells the playerAlive bool what value playerHealth is currently set to, replaces int a in the script with playerHealth
 
         if (enemyPresent == true)
         {
-            eventText.GetComponent<TextMeshProUGUI>().text = "A Skeleton appears!";
             fightButtonText.GetComponent<TextMeshProUGUI>().text = "Attack";
 
         }
@@ -76,7 +75,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
         // if else statement to change text for enemy being present
 
-        hp.GetComponent<TextMeshProUGUI>().text = "HP: " + playerHealth;
         // prints player health to UI
 
 
@@ -89,16 +87,43 @@ public class NewBehaviourScript : MonoBehaviour
        if (enemyPresent == false)
         {
             enemyPresent = true;
+            eventText.GetComponent<TextMeshProUGUI>().text = "A Skeleton appears!";
+            enemyHealthText.GetComponent<TextMeshProUGUI>().text = "Enemy HP:" + enemyHealth;
+            StatSet();
         }
        else
         {
-            enemyHealthText.GetComponent<TextMeshProUGUI>().text = "Enemy HP:" + enemyHealth;
+            Fight();
+            
         }
-
+       // button press spawns an enemy or performs a fight if an enemy is present
 
 
     }
+    public void Fight()
+    {
         
-    
+        if (enemyHealth <= 0)
+        {
+            enemyPresent = false;
+            eventText.GetComponent<TextMeshProUGUI>().text = "The skeleton clatters to the floor dead... again.";
+        }
+        else if (enemyHealth > 0)
+        {
+            enemyHealth = enemyHealth - attackDamage;
+            enemyHealthText.GetComponent<TextMeshProUGUI>().text = "Enemy HP:" + enemyHealth;
+            playerHealth = playerHealth - enemyDamage;
+            hp.GetComponent<TextMeshProUGUI>().text = "HP: " + playerHealth;
+        }
+
+
+    }
+    public void StatSet()
+    {
+        int attackDamage = power * level;
+        int playerHealth = stamina * level;
+        int enemyHealth = 4 * level;
+        int enemyDamage = 3 * level;
+    }
 
 }
