@@ -70,7 +70,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            eventText.GetComponent<TextMeshProUGUI>().text = "An enemy is approaching";
+            eventText.GetComponent<TextMeshPro>().text = "An enemy is approaching";
             fightButtonText.GetComponent<TextMeshProUGUI>().text = "fight";
         }
         // if else statement to change text for enemy being present
@@ -87,7 +87,7 @@ public class NewBehaviourScript : MonoBehaviour
        if (enemyPresent == false)
         {
             enemyPresent = true;
-            eventText.GetComponent<TextMeshProUGUI>().text = "A Skeleton appears!";
+            eventText.GetComponent<TextMeshPro>().text = "A Skeleton appears!";
             enemyHealthText.GetComponent<TextMeshProUGUI>().text = "Enemy HP:" + enemyHealth;
             StatSet();
         }
@@ -106,7 +106,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (enemyHealth <= 0)
         {
             enemyPresent = false;
-            eventText.GetComponent<TextMeshProUGUI>().text = "The skeleton clatters to the floor dead... again.";
+            eventText.GetComponent<TextMeshPro>().text = "The skeleton clatters to the floor dead... again.";
         }
         else if (enemyHealth > 0)
         {
@@ -122,7 +122,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         int attackDamage = power * level;
         int playerHealth = stamina * level;
-        int enemyHealth = 4 * level;
+        int enemyHealth = 20 * level;
         int enemyDamage = 3 * level;
     }
 
